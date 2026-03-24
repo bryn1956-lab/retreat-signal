@@ -8,6 +8,8 @@ const venues = JSON.parse(fs.readFileSync(path.join(srcDir, 'generated', 'venues
 
 const brandName = 'Retreat Signal';
 const brandTagline = 'Curated executive retreat venues for leadership teams in the Western U.S.';
+const shortlistFormAction = 'https://formspree.io/f/myknrdol';
+const featureVenueFormAction = 'https://formspree.io/f/xojkgnrz';
 const states = [...new Set(venues.map((venue) => venue.state))].sort();
 const useCases = [...new Set(venues.flatMap((venue) => venue.idealFor))].sort();
 const stateNameMap = {
@@ -30,7 +32,7 @@ fs.mkdirSync(path.join(distDir, 'guides'), { recursive: true });
 const styles = `
 :root{--bg:#0b1020;--panel:#121933;--panel2:#0f1530;--text:#eef2ff;--muted:#aab6d3;--accent:#7dd3fc;--line:#24304f;--good:#86efac}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#0f172a);color:var(--text)}a{color:var(--accent);text-decoration:none}
-.container{max-width:1120px;margin:0 auto;padding:24px}.hero{padding:56px 0 24px}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700}.hero h1{font-size:46px;line-height:1.04;margin:10px 0 16px;max-width:920px}.hero p{max-width:780px;color:var(--muted);font-size:18px;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.card{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:20px}.card h3{margin:0 0 10px;font-size:22px}.meta{color:var(--muted);font-size:14px;margin-bottom:10px}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);margin:0 8px 8px 0}.section{padding:20px 0 36px}.section h2{font-size:28px;margin:0 0 10px}.section p{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}.stat{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:16px;padding:16px}.stat .n{font-size:28px;font-weight:800}.stat .l{font-size:13px;color:var(--muted)}.detail{max-width:860px}.detail h1{font-size:42px;margin-bottom:8px}.detail p,.detail li{color:var(--muted);line-height:1.6}.footer{padding:30px 0 60px;color:var(--muted);font-size:14px}.nav{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 14px}.nav a{color:var(--text)}.brand{display:flex;flex-direction:column;margin-bottom:16px}.brand-name{font-size:18px;font-weight:800;letter-spacing:.04em}.brand-tag{font-size:13px;color:var(--muted)}.callout{background:linear-gradient(180deg,rgba(125,211,252,.08),rgba(125,211,252,.02));border:1px solid var(--line);border-radius:18px;padding:20px}.split{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.list{padding-left:18px}.feature{border-left:3px solid var(--accent);padding-left:14px;margin:14px 0}.browse-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.browse-card{background:rgba(15,21,48,.92);border:1px solid var(--line);border-radius:16px;padding:18px}.browse-card h3{margin:0 0 8px;font-size:20px}.small{font-size:14px;color:var(--muted)}.cta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.cta{background:linear-gradient(180deg,rgba(134,239,172,.08),rgba(125,211,252,.04));border:1px solid var(--line);border-radius:18px;padding:22px}.cta h3{margin-top:0}.button{display:inline-block;background:var(--accent);color:#07111f!important;padding:12px 16px;border-radius:12px;font-weight:700;margin-top:10px}.button.secondary{background:transparent;color:var(--text)!important;border:1px solid var(--line)}.formbox{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:20px}.formbox label{display:block;font-size:14px;color:var(--muted);margin:14px 0 6px}.formbox input,.formbox textarea,.formbox select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0d1430;color:var(--text)}.formbox textarea{min-height:120px;resize:vertical}@media(max-width:860px){.split{grid-template-columns:1fr}.hero h1,.detail h1{font-size:36px}.stats{grid-template-columns:repeat(2,1fr)}}
+.container{max-width:1120px;margin:0 auto;padding:24px}.hero{padding:56px 0 24px}.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700}.hero h1{font-size:46px;line-height:1.04;margin:10px 0 16px;max-width:920px}.hero p{max-width:780px;color:var(--muted);font-size:18px;line-height:1.6}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.card{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:20px}.card h3{margin:0 0 10px;font-size:22px}.meta{color:var(--muted);font-size:14px;margin-bottom:10px}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted);margin:0 8px 8px 0}.section{padding:20px 0 36px}.section h2{font-size:28px;margin:0 0 10px}.section p{color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}.stat{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:16px;padding:16px}.stat .n{font-size:28px;font-weight:800}.stat .l{font-size:13px;color:var(--muted)}.detail{max-width:860px}.detail h1{font-size:42px;margin-bottom:8px}.detail p,.detail li{color:var(--muted);line-height:1.6}.footer{padding:30px 0 60px;color:var(--muted);font-size:14px}.nav{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 14px}.nav a{color:var(--text)}.brand{display:flex;flex-direction:column;margin-bottom:16px}.brand-name{font-size:18px;font-weight:800;letter-spacing:.04em}.brand-tag{font-size:13px;color:var(--muted)}.callout{background:linear-gradient(180deg,rgba(125,211,252,.08),rgba(125,211,252,.02));border:1px solid var(--line);border-radius:18px;padding:20px}.split{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.list{padding-left:18px}.feature{border-left:3px solid var(--accent);padding-left:14px;margin:14px 0}.browse-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.browse-card{background:rgba(15,21,48,.92);border:1px solid var(--line);border-radius:16px;padding:18px}.browse-card h3{margin:0 0 8px;font-size:20px}.small{font-size:14px;color:var(--muted)}.cta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.cta{background:linear-gradient(180deg,rgba(134,239,172,.08),rgba(125,211,252,.04));border:1px solid var(--line);border-radius:18px;padding:22px}.cta h3{margin-top:0}.button{display:inline-block;background:var(--accent);color:#07111f!important;padding:12px 16px;border-radius:12px;font-weight:700;margin-top:10px;border:none;cursor:pointer}.button.secondary{background:transparent;color:var(--text)!important;border:1px solid var(--line)}.formbox{background:rgba(18,25,51,.92);border:1px solid var(--line);border-radius:18px;padding:20px}.formbox label{display:block;font-size:14px;color:var(--muted);margin:14px 0 6px}.formbox input,.formbox textarea,.formbox select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0d1430;color:var(--text)}.formbox textarea{min-height:120px;resize:vertical}@media(max-width:860px){.split{grid-template-columns:1fr}.hero h1,.detail h1{font-size:36px}.stats{grid-template-columns:repeat(2,1fr)}}
 `;
 
 const layout = (title, body) => `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${title}</title><meta name="description" content="${brandTagline}"><style>${styles}</style></head><body>${body}</body></html>`;
@@ -211,15 +213,18 @@ const shortlistBody = `
       <p>Use this if you want help narrowing the current inventory into a tighter working set based on team size, region, logistics, and meeting style.</p>
     </section>
     <section class="section split">
-      <div class="formbox">
+      <form class="formbox" action="${shortlistFormAction}" method="POST">
         <h2>Shortlist intake</h2>
-        <label>Company / team</label><input placeholder="Your company or team name">
-        <label>Team size</label><input placeholder="e.g. 8, 15, 30">
-        <label>Preferred states / region</label><input placeholder="e.g. Arizona, California, Pacific Northwest">
-        <label>Primary retreat type</label><select><option>Executive retreat</option><option>Leadership offsite</option><option>Board meeting</option><option>Remote team offsite</option></select>
-        <label>Notes</label><textarea placeholder="Budget, airport preferences, buyout needs, meeting style, dates, etc."></textarea>
-        <p class="small">Current version is a static intake mockup. In production, this would route to email, CRM, or a form backend.</p>
-      </div>
+        <input type="hidden" name="_subject" value="Retreat Signal shortlist request">
+        <label>Company / team</label><input name="company" placeholder="Your company or team name" required>
+        <label>Your email</label><input type="email" name="email" placeholder="you@company.com" required>
+        <label>Team size</label><input name="team_size" placeholder="e.g. 8, 15, 30" required>
+        <label>Preferred states / region</label><input name="region" placeholder="e.g. Arizona, California, Pacific Northwest">
+        <label>Primary retreat type</label><select name="retreat_type"><option>Executive retreat</option><option>Leadership offsite</option><option>Board meeting</option><option>Remote team offsite</option></select>
+        <label>Notes</label><textarea name="notes" placeholder="Budget, airport preferences, buyout needs, meeting style, dates, etc."></textarea>
+        <button class="button" type="submit">Send shortlist request</button>
+        <p class="small">This form now routes to Formspree for MVP lead capture.</p>
+      </form>
       <div class="card">
         <h2>What you’d get</h2>
         <ul class="list">
@@ -258,14 +263,17 @@ const featureBody = `
       <p>This page is for venue operators who want to be reviewed for inclusion in the directory and, later, premium visibility.</p>
     </section>
     <section class="section split">
-      <div class="formbox">
+      <form class="formbox" action="${featureVenueFormAction}" method="POST">
         <h2>Venue submission</h2>
-        <label>Venue name</label><input placeholder="Venue name">
-        <label>Website</label><input placeholder="https://...">
-        <label>Location</label><input placeholder="City, State">
-        <label>Why your venue fits</label><textarea placeholder="Meeting space, lodging, executive fit, buyout options, airport access, etc."></textarea>
-        <p class="small">Current version is static. In production, this would route to a review queue and outreach workflow.</p>
-      </div>
+        <input type="hidden" name="_subject" value="Retreat Signal feature venue request">
+        <label>Venue name</label><input name="venue_name" placeholder="Venue name" required>
+        <label>Your email</label><input type="email" name="email" placeholder="you@venue.com" required>
+        <label>Website</label><input name="website" placeholder="https://..." required>
+        <label>Location</label><input name="location" placeholder="City, State">
+        <label>Why your venue fits</label><textarea name="fit_notes" placeholder="Meeting space, lodging, executive fit, buyout options, airport access, etc."></textarea>
+        <button class="button" type="submit">Submit venue</button>
+        <p class="small">This form now routes to Formspree for MVP venue intake.</p>
+      </form>
       <div class="card">
         <h2>Review criteria</h2>
         <ul class="list">
@@ -383,4 +391,4 @@ for (const venue of venues) {
   fs.writeFileSync(path.join(distDir, 'venues', `${venue.slug}.html`), layout(`${venue.name} | ${brandName}`, body));
 }
 
-console.log(`Built ${brandName} with ${venues.length} venues, ${states.length} state pages, service pages, and SEO guides.`);
+console.log(`Built ${brandName} with ${venues.length} venues, ${states.length} state pages, service pages, SEO guides, and live form endpoints.`);
