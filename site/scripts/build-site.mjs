@@ -23,13 +23,6 @@ const featureVenueFormAction = 'https://formspree.io/f/xojkgnrz';
 const bookingInquiryFormAction = shortlistFormAction;
 const states = [...new Set(venues.map((venue) => venue.state))].sort();
 const useCases = [...new Set(venues.flatMap((venue) => venue.idealFor))].sort();
-  AZ: 'Arizona',
-  CA: 'California',
-  CO: 'Colorado',
-  OR: 'Oregon',
-  UT: 'Utah',
-  WA: 'Washington'
-};
 
 fs.rmSync(distDir, { recursive: true, force: true });
 fs.mkdirSync(distDir, { recursive: true });
