@@ -4,6 +4,16 @@ import path from 'path';
 const root = path.resolve(process.cwd());
 const srcDir = path.join(root, 'src');
 const distDir = path.join(root, 'dist');
+
+const stateNameMap = {
+  AZ: 'Arizona',
+  CA: 'California',
+  CO: 'Colorado',
+  OR: 'Oregon',
+  UT: 'Utah',
+  WA: 'Washington'
+};
+
 const venues = JSON.parse(fs.readFileSync(path.join(srcDir, 'generated', 'venues.json'), 'utf8')).map(enrichVenue);
 
 const brandName = 'Retreat Signal';
@@ -13,7 +23,6 @@ const featureVenueFormAction = 'https://formspree.io/f/xojkgnrz';
 const bookingInquiryFormAction = shortlistFormAction;
 const states = [...new Set(venues.map((venue) => venue.state))].sort();
 const useCases = [...new Set(venues.flatMap((venue) => venue.idealFor))].sort();
-const stateNameMap = {
   AZ: 'Arizona',
   CA: 'California',
   CO: 'Colorado',
